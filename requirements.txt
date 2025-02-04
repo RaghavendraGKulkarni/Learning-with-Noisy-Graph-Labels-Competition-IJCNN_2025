@@ -47,6 +47,8 @@ hpack==4.0.0
 hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1619110129307/work
 idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1726459485162/work
 ijson==3.3.0
+imbalanced-learn==0.12.4
+imblearn==0.0
 importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1726082825846/work
 importlib_resources==6.4.5
 ipykernel @ file:///croot/ipykernel_1705933831282/work
@@ -66,7 +68,7 @@ locket @ file:///home/conda/feedstock_root/build_artifacts/locket_1650660393415/
 lz4 @ file:///home/conda/feedstock_root/build_artifacts/lz4_1725089417274/work
 markdown-it-py @ file:///home/conda/feedstock_root/build_artifacts/markdown-it-py_1686175045316/work
 MarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1724959465445/work
-matplotlib==3.9.2
+matplotlib==3.9.4
 matplotlib-inline @ file:///opt/conda/conda-bld/matplotlib-inline_1662014470464/work
 mdurl @ file:///home/conda/feedstock_root/build_artifacts/mdurl_1704317613764/work
 mpmath @ file:///home/conda/feedstock_root/build_artifacts/mpmath_1678228039184/work
@@ -76,10 +78,10 @@ nbformat==5.10.4
 nest-asyncio @ file:///croot/nest-asyncio_1708532673751/work
 networkx==2.6.3
 numba @ file:///home/conda/feedstock_root/build_artifacts/numba_1718888028049/work
-numpy==1.26.4
+numpy==1.22.4
 nvtx @ file:///home/conda/feedstock_root/build_artifacts/nvtx_1708093814275/work
 packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1718189413536/work
-pandas==2.2.2
+pandas==1.3.5
 parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
 partd @ file:///home/conda/feedstock_root/build_artifacts/partd_1715026491486/work
 pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work

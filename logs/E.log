@@ -1,0 +1,20 @@
+2025-02-04 20:45:55,869 - Epoch: 1/10
+2025-02-04 20:45:55,869 - Test Log Likelihood: -2131.1303, Test Accuracy: 0.9468, Test F1: 0.9466
+2025-02-04 20:46:02,760 - Epoch: 2/10
+2025-02-04 20:46:02,760 - Test Log Likelihood: -3029.4800, Test Accuracy: 0.9583, Test F1: 0.9588
+2025-02-04 20:46:09,654 - Epoch: 3/10
+2025-02-04 20:46:09,654 - Test Log Likelihood: -2514.6723, Test Accuracy: 0.9814, Test F1: 0.9815
+2025-02-04 20:46:16,355 - Epoch: 4/10
+2025-02-04 20:46:16,355 - Test Log Likelihood: -2400.9002, Test Accuracy: 0.9787, Test F1: 0.9786
+2025-02-04 20:46:23,057 - Epoch: 5/10
+2025-02-04 20:46:23,057 - Test Log Likelihood: -2346.9114, Test Accuracy: 0.9876, Test F1: 0.9877
+2025-02-04 20:46:29,539 - Epoch: 6/10
+2025-02-04 20:46:29,539 - Test Log Likelihood: -2254.8261, Test Accuracy: 0.9849, Test F1: 0.9850
+2025-02-04 20:46:36,193 - Epoch: 7/10
+2025-02-04 20:46:36,193 - Test Log Likelihood: -2222.3549, Test Accuracy: 0.9938, Test F1: 0.9937
+2025-02-04 20:46:42,729 - Epoch: 8/10
+2025-02-04 20:46:42,729 - Test Log Likelihood: -2118.4442, Test Accuracy: 0.9911, Test F1: 0.9911
+2025-02-04 20:46:49,633 - Epoch: 9/10
+2025-02-04 20:46:49,633 - Test Log Likelihood: -2002.5267, Test Accuracy: 0.9938, Test F1: 0.9939
+2025-02-04 20:46:56,247 - Epoch: 10/10
+2025-02-04 20:46:56,247 - Test Log Likelihood: -2001.9415, Test Accuracy: 0.9849, Test F1: 0.9850

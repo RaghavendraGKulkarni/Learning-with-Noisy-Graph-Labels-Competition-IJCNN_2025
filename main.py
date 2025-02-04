@@ -9,9 +9,8 @@ import networkx as nx
 from karateclub import Graph2Vec
 
 import torch
-from source.models import myModel
+from source.models import classifier, myModel
 from source.train import train
-
 
 def set_device_and_seed():
     
@@ -28,6 +27,22 @@ def create_networkx_graph(graph):
     graphDF = pd.DataFrame({'from':graph['edge_index'][0], 'to':graph['edge_index'][1], 'edge_attr':graph['edge_attr']})
     
     G = nx.from_pandas_edgelist(graphDF, source = 'from', target = 'to', edge_attr = 'edge_attr')
+    
+    degrees = dict(G.degree())
+    deg_cent = dict(nx.degree_centrality(G))
+    
+    node_features = {}
+    for node in G.nodes():
+        feature_vector = np.zeros(7)
+        total = 0.0
+        for edge in G.edges(node, data = True):
+            adj = (edge[0] + edge[1]) - node
+            feature_vector += (np.asarray(edge[2].get('edge_attr', np.zeros(7))) * degrees[adj])
+            total += degrees[adj]
+        feature_vector /= total
+        feature_vector = feature_vector.tolist() + [deg_cent[node]]
+        node_features[node] = {str(i) : v for i, v in enumerate(feature_vector)}
+    nx.set_node_attributes(G, node_features)
     
     return G
 
@@ -52,11 +67,11 @@ def load_and_test(test_path, device):
     test_features = scaler.transform(test_features)
     test_tensor = torch.tensor(test_features, dtype = torch.float32).to(device)
     
-    model = myModel().to(device)
+    model = classifier().to(device)
     model.load_state_dict(torch.load(filepaths[dataset]['prediction_model'], weights_only = True))
     
     with torch.no_grad():
-        pred_probs = model.predict(test_tensor)
+        pred_probs = model(test_tensor)
     
     pred_labels = torch.argmax(pred_probs, dim = 1).cpu().numpy()
     ids = np.asarray([x for x in range(len(pred_labels))])
@@ -99,18 +114,18 @@ def train_and_test(train_path, test_path, device):
     test_features = scaler.transform(test_features)
     test_tensor = torch.tensor(test_features, dtype = torch.float32).to(device)
     
-    model = myModel().to(device)
+    model = classifier().to(device)
     model.load_state_dict(torch.load('./checkpoints/E/prediction_model.pth', weights_only = True))
     
     with torch.no_grad():
-        pred_probs = model.predict(test_tensor)
+        pred_probs = model(test_tensor)
     
     pred_labels = torch.argmax(pred_probs, dim = 1).cpu().numpy()
     ids = np.asarray([x for x in range(len(pred_labels))])
     pred_df = pd.DataFrame({'id':ids, 'pred':pred_labels})
     
     pred_df.to_csv('./submission/testset_E.csv', index = False)
-    
+
     return
 
 

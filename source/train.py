@@ -1,16 +1,16 @@
 import os
 import pickle
+import numpy as np
 
 import torch
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, f1_score, ConfusionMatrixDisplay
 
 import heapq
 import logging
 
-from .models import myModel, myLoss
+from .models import classifier, myModel
 
 def train(train_features, device):
     
@@ -24,54 +24,14 @@ def train(train_features, device):
     train_X = scaler.transform(train_X)
     validation_X = scaler.transform(validation_X)
     
-    counts = train_y.value_counts().to_dict()
-    total_sum = sum(list(counts.values()))
-    for label in counts.keys():
-        counts[label] = (total_sum - counts[label]) / total_sum
-    weights = [counts[label] for label in range(6)]
-    weights = torch.tensor(weights, dtype = torch.float32).to(device)
-    
-    train_X_tensor, train_y_tensor = torch.tensor(train_X, dtype = torch.float32).to(device), torch.tensor(train_y.values.reshape(-1, 1), dtype = torch.long).view(-1).to(device)
-    validation_X_tensor, validation_y_tensor = torch.tensor(validation_X, dtype = torch.float32).to(device), torch.tensor(validation_y.values.reshape(-1, 1), dtype = torch.long).view(-1).to(device)
-
-    model = myModel().to(device)
-    loss = myLoss(weights)
-    optimizer = torch.optim.Adam(params = model.parameters(), lr = 0.01, weight_decay = 1e-5)
-    
-    num_epochs = 1000
-    bestEpochsNum, bestEpochs = 10, []
-    for epoch in range(1, num_epochs + 1):
-
-        train_noisy_probs = model(train_X_tensor)
-
-        optimizer.zero_grad()
-        train_loss = loss(train_noisy_probs, train_y_tensor, model.noise_matrix)
-        train_loss.backward()
-        optimizer.step()
-
-        train_noisy_labels = torch.argmax(train_noisy_probs, dim = 1).cpu().numpy()
-        train_accuracy = accuracy_score(train_y, train_noisy_labels)
-        train_f1 = f1_score(train_y, train_noisy_labels, average = 'weighted')
-
-        with torch.no_grad():
-            validation_noisy_probs = model(validation_X_tensor)
-
-        validation_loss = loss(validation_noisy_probs, validation_y_tensor, model.noise_matrix)
-        validation_noisy_labels = torch.argmax(validation_noisy_probs, dim = 1).cpu().numpy()
-        validation_accuracy = accuracy_score(validation_y, validation_noisy_labels)
-        validation_f1 = f1_score(validation_y, validation_noisy_labels, average = 'weighted')
-
-        epoch_info = (train_accuracy, train_f1, train_loss.item(), validation_accuracy, validation_f1, validation_loss.item(), epoch, model.state_dict())
-
-        if len(bestEpochs) >= bestEpochsNum:
-            heapq.heappushpop(bestEpochs, epoch_info)
-        else:
-            heapq.heappush(bestEpochs, epoch_info)
-
-        if epoch % logging_frequency == 0:
-            logging.info(f"Epoch: {epoch}/{num_epochs}")
-            logging.info(f"Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, Train F1: {train_f1:.4f}")
-            logging.info(f"Validation Loss: {validation_loss:.4f}, Validation Accuracy: {validation_accuracy:.4f}, Validation F1: {validation_f1:.4f}")
+    np.random.seed(42)
+    torch.manual_seed(42)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(42)
+        torch.cuda.manual_seed_all(42)
+    classifier_model = classifier()
+    model = myModel(classifier_model, num_classes = 6, device = device, bestEpochsNum = 10)
+    model.fit(train_X, train_y, validation_X, validation_y, num_epochs = 10)
     
     parent = './checkpoints/E/'
     for filename in os.listdir(parent):
@@ -82,22 +42,19 @@ def train(train_features, device):
             except OSError as e:
                 print(f"Error deleting {file_path}: {e}")
     
-    for epoch in bestEpochs:
-        name = f'model_E_epoch_{epoch[6]}.pth'
+    for epoch in model.bestEpochs:
+        name = f'model_E_epoch_{epoch[3]}.pth'
         torch.save({
-            'epoch':epoch[6],
-            'train_loss':epoch[2],
-            'train_accuracy':epoch[0],
-            'train_f1':epoch[1],
-            'test_loss':epoch[5],
-            'test_accuracy':epoch[3],
-            'test_f1':epoch[4],
-            'model_state_dict': epoch[7]
+            'epoch':epoch[3],
+            'test_log_likelihood':epoch[2],
+            'test_accuracy':epoch[0],
+            'test_f1':epoch[1],
+            'model_state_dict': epoch[4]
         }, parent + name)
     
-    bestEpochs.sort(reverse = True)
-    best_model = myModel().to(device)
-    best_model.load_state_dict(bestEpochs[0][7])
+    model.bestEpochs.sort(reverse = True)
+    best_model = classifier().to(device)
+    best_model.load_state_dict(model.bestEpochs[0][4])
     
     torch.save(best_model.state_dict(), './checkpoints/E/prediction_model.pth')
     with open('./checkpoints/E/scaler.pkl', 'wb') as f:

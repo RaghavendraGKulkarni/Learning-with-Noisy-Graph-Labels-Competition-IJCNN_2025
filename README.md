@@ -4,13 +4,13 @@
 
 1. We first make use of Graph2Vec model to generate Graph Embeddings for the training and testing graphs.
 
-2. Then we initialize a classifier model appended with a probability transition matrix.
+2. Then we initialize a classifier model and a probability transition matrix.
 
-3. Both, the model parameters and the transition matrix, are learnt simultaneously during the training process.
+3. Both, the model parameters and the transition matrix, are learnt simultaneously using the Expectation Maximization Iterative algorithm.
 
-4. Appropriate regularization on the loss function ensures the validity of the probability transition matrix.
+4. Appropriate normalization at every update ensures the validity of the probability transition matrix.
 
-5. The *predict()* function removes the transition matrix and uses only the classifier model for predicting the true labels on the test set.
+5. The *load_and_test()* function uses only the classifier model for predicting the true labels on the test set.
 
 ## Steps to run the code:
 
