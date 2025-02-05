@@ -27,13 +27,13 @@ class classifier(torch.nn.Module):
 
 class myModel:
     
-    def __init__(self, model, num_classes, device, bestEpochsNum):
+    def __init__(self, model, num_classes, device):
         self.num_classes = num_classes
         self.device = device
         self.model = model.to(self.device)
         self.transition_matrix = np.full((self.num_classes, self.num_classes), 0.1)
         np.fill_diagonal(self.transition_matrix, 0.5)
-        self.bestEpochsNum, self.bestEpochs = bestEpochsNum, []
+        self.bestEpochs = []
         self.loss, self.optimizer = None, None
         pass
     
@@ -112,6 +112,9 @@ class myModel:
         logging.basicConfig(filename = './logs/E.log', filemode = 'w', level = logging.INFO, format = '%(asctime)s - %(message)s')
         logging_frequency = 1
         
+        train_labels = np.eye(self.num_classes)[train_y.values]
+        train_loss = self.train(train_X_tensor, train_labels)
+        
         for epoch in range(1, num_epochs + 1):
             
             # E - Step
@@ -134,14 +137,12 @@ class myModel:
             test_accuracy = accuracy_score(true_labels, test_labels)
             test_f1 = f1_score(true_labels, test_labels, average = 'weighted')
             
-            epoch_info = (test_accuracy, test_f1, test_log_likelihood, epoch, self.model.state_dict())
-            if len(self.bestEpochs) >= self.bestEpochsNum:
-                heapq.heappushpop(self.bestEpochs, epoch_info)
-            else:
-                heapq.heappush(self.bestEpochs, epoch_info)
+            epoch_info = (-test_log_likelihood, -train_log_likelihood, epoch, self.model.state_dict())
+            self.bestEpochs.append(epoch_info)
             
             if epoch % logging_frequency == 0:
                 #print(f"Train Log Likelihood: {train_log_likelihood}, Test Log Likelihood: {test_log_likelihood}")
                 logging.info(f"Epoch: {epoch}/{num_epochs}")
-                logging.info(f"Test Log Likelihood: {test_log_likelihood:.4f}, Test Accuracy: {test_accuracy:.4f}, Test F1: {test_f1:.4f}")
+                logging.info(f"Train Log Likelihood: {train_log_likelihood:.4f}, Test Log Likelihood: {test_log_likelihood:.4f}, Test Accuracy: {test_accuracy:.4f}, Test F1: {test_f1:.4f}")
+
         return

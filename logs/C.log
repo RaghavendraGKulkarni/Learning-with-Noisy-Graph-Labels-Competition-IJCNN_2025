@@ -1,20 +1,40 @@
-2025-02-04 16:45:46,881 - Epoch: 1/10
-2025-02-04 16:45:46,882 - Test Log Likelihood: -1330.0807, Test Accuracy: 0.9727, Test F1: 0.9727
-2025-02-04 16:45:53,307 - Epoch: 2/10
-2025-02-04 16:45:53,307 - Test Log Likelihood: -1732.4882, Test Accuracy: 0.9271, Test F1: 0.9330
-2025-02-04 16:45:59,205 - Epoch: 3/10
-2025-02-04 16:45:59,205 - Test Log Likelihood: -1324.5310, Test Accuracy: 0.9831, Test F1: 0.9832
-2025-02-04 16:46:05,043 - Epoch: 4/10
-2025-02-04 16:46:05,043 - Test Log Likelihood: -1216.7816, Test Accuracy: 0.9896, Test F1: 0.9901
-2025-02-04 16:46:10,938 - Epoch: 5/10
-2025-02-04 16:46:10,939 - Test Log Likelihood: -1204.2837, Test Accuracy: 0.9987, Test F1: 0.9987
-2025-02-04 16:46:17,122 - Epoch: 6/10
-2025-02-04 16:46:17,122 - Test Log Likelihood: -1199.0386, Test Accuracy: 0.9948, Test F1: 0.9956
-2025-02-04 16:46:23,386 - Epoch: 7/10
-2025-02-04 16:46:23,386 - Test Log Likelihood: -1201.7176, Test Accuracy: 0.9974, Test F1: 0.9974
-2025-02-04 16:46:29,568 - Epoch: 8/10
-2025-02-04 16:46:29,569 - Test Log Likelihood: -1202.2096, Test Accuracy: 0.9961, Test F1: 0.9960
-2025-02-04 16:46:35,727 - Epoch: 9/10
-2025-02-04 16:46:35,727 - Test Log Likelihood: -1201.4594, Test Accuracy: 0.9961, Test F1: 0.9959
-2025-02-04 16:46:42,037 - Epoch: 10/10
-2025-02-04 16:46:42,037 - Test Log Likelihood: -1202.6191, Test Accuracy: 0.9961, Test F1: 0.9959
+2025-02-05 17:14:02,970 - Epoch: 1/20
+2025-02-05 17:14:02,970 - Train Log Likelihood: -8400.0520, Test Log Likelihood: -1835.3540, Test Accuracy: 0.9518, Test F1: 0.9535
+2025-02-05 17:14:09,020 - Epoch: 2/20
+2025-02-05 17:14:09,021 - Train Log Likelihood: -8429.7543, Test Log Likelihood: -1641.5750, Test Accuracy: 0.9609, Test F1: 0.9617
+2025-02-05 17:14:14,862 - Epoch: 3/20
+2025-02-05 17:14:14,862 - Train Log Likelihood: -8413.0049, Test Log Likelihood: -1577.3838, Test Accuracy: 0.9609, Test F1: 0.9615
+2025-02-05 17:14:20,636 - Epoch: 4/20
+2025-02-05 17:14:20,636 - Train Log Likelihood: -8414.4429, Test Log Likelihood: -1587.9160, Test Accuracy: 0.9596, Test F1: 0.9598
+2025-02-05 17:14:26,591 - Epoch: 5/20
+2025-02-05 17:14:26,591 - Train Log Likelihood: -8413.9239, Test Log Likelihood: -1580.2960, Test Accuracy: 0.9635, Test F1: 0.9643
+2025-02-05 17:14:32,604 - Epoch: 6/20
+2025-02-05 17:14:32,604 - Train Log Likelihood: -8413.7210, Test Log Likelihood: -1557.4981, Test Accuracy: 0.9674, Test F1: 0.9676
+2025-02-05 17:14:38,682 - Epoch: 7/20
+2025-02-05 17:14:38,682 - Train Log Likelihood: -8413.7069, Test Log Likelihood: -1544.7070, Test Accuracy: 0.9596, Test F1: 0.9600
+2025-02-05 17:14:44,764 - Epoch: 8/20
+2025-02-05 17:14:44,765 - Train Log Likelihood: -8417.3615, Test Log Likelihood: -1559.7430, Test Accuracy: 0.9701, Test F1: 0.9703
+2025-02-05 17:14:51,206 - Epoch: 9/20
+2025-02-05 17:14:51,206 - Train Log Likelihood: -8418.9404, Test Log Likelihood: -1575.2081, Test Accuracy: 0.9688, Test F1: 0.9691
+2025-02-05 17:14:57,605 - Epoch: 10/20
+2025-02-05 17:14:57,605 - Train Log Likelihood: -8420.8328, Test Log Likelihood: -1555.0042, Test Accuracy: 0.9674, Test F1: 0.9679
+2025-02-05 17:15:03,655 - Epoch: 11/20
+2025-02-05 17:15:03,656 - Train Log Likelihood: -8420.8412, Test Log Likelihood: -1553.0950, Test Accuracy: 0.9596, Test F1: 0.9601
+2025-02-05 17:15:09,825 - Epoch: 12/20
+2025-02-05 17:15:09,825 - Train Log Likelihood: -8420.8023, Test Log Likelihood: -1544.6145, Test Accuracy: 0.9622, Test F1: 0.9630
+2025-02-05 17:15:15,796 - Epoch: 13/20
+2025-02-05 17:15:15,796 - Train Log Likelihood: -8422.6707, Test Log Likelihood: -1546.3964, Test Accuracy: 0.9635, Test F1: 0.9638
+2025-02-05 17:15:21,780 - Epoch: 14/20
+2025-02-05 17:15:21,780 - Train Log Likelihood: -8422.3629, Test Log Likelihood: -1549.6270, Test Accuracy: 0.9635, Test F1: 0.9642
+2025-02-05 17:15:27,425 - Epoch: 15/20
+2025-02-05 17:15:27,425 - Train Log Likelihood: -8422.4081, Test Log Likelihood: -1529.6835, Test Accuracy: 0.9557, Test F1: 0.9567
+2025-02-05 17:15:33,385 - Epoch: 16/20
+2025-02-05 17:15:33,385 - Train Log Likelihood: -8422.3719, Test Log Likelihood: -1531.0801, Test Accuracy: 0.9622, Test F1: 0.9627
+2025-02-05 17:15:37,348 - Epoch: 17/20
+2025-02-05 17:15:37,348 - Train Log Likelihood: -8422.4238, Test Log Likelihood: -1531.9135, Test Accuracy: 0.9583, Test F1: 0.9591
+2025-02-05 17:15:43,469 - Epoch: 18/20
+2025-02-05 17:15:43,469 - Train Log Likelihood: -8422.4196, Test Log Likelihood: -1513.9114, Test Accuracy: 0.9557, Test F1: 0.9563
+2025-02-05 17:15:49,510 - Epoch: 19/20
+2025-02-05 17:15:49,510 - Train Log Likelihood: -8422.4142, Test Log Likelihood: -1506.6419, Test Accuracy: 0.9714, Test F1: 0.9726
+2025-02-05 17:15:55,572 - Epoch: 20/20
+2025-02-05 17:15:55,572 - Train Log Likelihood: -8422.4162, Test Log Likelihood: -1518.9319, Test Accuracy: 0.9505, Test F1: 0.9521

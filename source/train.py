@@ -30,8 +30,12 @@ def train(train_features, device):
         torch.cuda.manual_seed(42)
         torch.cuda.manual_seed_all(42)
     classifier_model = classifier()
-    model = myModel(classifier_model, num_classes = 6, device = device, bestEpochsNum = 10)
-    model.fit(train_X, train_y, validation_X, validation_y, num_epochs = 10)
+    model = myModel(classifier_model, num_classes = 6, device = device)
+    model.fit(train_X, train_y, validation_X, validation_y, num_epochs = 20)
+    
+    model.bestEpochs.sort()
+    best_model = classifier()
+    best_model.load_state_dict(model.bestEpochs[0][3])
     
     parent = './checkpoints/E/'
     for filename in os.listdir(parent):
@@ -41,21 +45,14 @@ def train(train_features, device):
                 os.remove(file_path)
             except OSError as e:
                 print(f"Error deleting {file_path}: {e}")
-    
-    for epoch in model.bestEpochs:
-        name = f'model_E_epoch_{epoch[3]}.pth'
+    for epoch in model.bestEpochs[:10]:
+        name = f'model_E_epoch_{epoch[2]}.pth'
         torch.save({
-            'epoch':epoch[3],
-            'test_log_likelihood':epoch[2],
-            'test_accuracy':epoch[0],
-            'test_f1':epoch[1],
-            'model_state_dict': epoch[4]
+            'epoch':epoch[2],
+            'train_log_likelihood':-epoch[1],
+            'test_log_likelihood':-epoch[0],
+            'model_state_dict': epoch[3]
         }, parent + name)
-    
-    model.bestEpochs.sort(reverse = True)
-    best_model = classifier().to(device)
-    best_model.load_state_dict(model.bestEpochs[0][4])
-    
     torch.save(best_model.state_dict(), './checkpoints/E/prediction_model.pth')
     with open('./checkpoints/E/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)
