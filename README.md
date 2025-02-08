@@ -2,15 +2,13 @@
 
 ## Approach:
 
-1. We first make use of Graph2Vec model to generate Graph Embeddings for the training and testing graphs.
+1. We first make use of custom GINConv model to generate Graph Embeddings for the training and testing graphs.
 
-2. Then we initialize a classifier model and a probability transition matrix.
+2. Then we initialize a classifier model.
 
-3. Both, the model parameters and the transition matrix, are learnt simultaneously using the Expectation Maximization Iterative algorithm.
+3. Both, the classifier model and GINConv model parameters are learnt simultaneously during the training process.
 
-4. Appropriate normalization at every update ensures the validity of the probability transition matrix.
-
-5. The *load_and_test()* function uses only the classifier model for predicting the true labels on the test set.
+5. The *load_and_test()* function loads the appropriate classifier model for predicting the true labels on the test set.
 
 ## Steps to run the code:
 
@@ -21,12 +19,14 @@ pip install -r requirements.txt
 
 2. Run the *main.py* file using suitable command line arguments.
 
-3. The *--test_path* command line argument should contain the path to the compressed json file of the test graphs.
+3. The *--batch_size* command line argument decides the batch size to be moved to the computing device. It has a default value of 128 and can be adjusted according to the back end machine.
+
+4. The *--test_path* command line argument should contain the path to the compressed json file of the test graphs.
 ```shell
 python main.py --test_path /path/to/test.json.gz
 ```
 
-4. Optionally, the *--train_path* command line argument should contain the path to the compressed json file of the train graphs, if the user wishes to train on new graphs.
+5. Optionally, the *--train_path* command line argument should contain the path to the compressed json file of the train graphs, if the user wishes to train on new graphs.
 ```shell
 python main.py --test_path /path/to/test.json.gz --train_path /path/to/train.json.gz
 ```

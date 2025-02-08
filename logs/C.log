@@ -1,40 +1,10 @@
-2025-02-05 17:14:02,970 - Epoch: 1/20
-2025-02-05 17:14:02,970 - Train Log Likelihood: -8400.0520, Test Log Likelihood: -1835.3540, Test Accuracy: 0.9518, Test F1: 0.9535
-2025-02-05 17:14:09,020 - Epoch: 2/20
-2025-02-05 17:14:09,021 - Train Log Likelihood: -8429.7543, Test Log Likelihood: -1641.5750, Test Accuracy: 0.9609, Test F1: 0.9617
-2025-02-05 17:14:14,862 - Epoch: 3/20
-2025-02-05 17:14:14,862 - Train Log Likelihood: -8413.0049, Test Log Likelihood: -1577.3838, Test Accuracy: 0.9609, Test F1: 0.9615
-2025-02-05 17:14:20,636 - Epoch: 4/20
-2025-02-05 17:14:20,636 - Train Log Likelihood: -8414.4429, Test Log Likelihood: -1587.9160, Test Accuracy: 0.9596, Test F1: 0.9598
-2025-02-05 17:14:26,591 - Epoch: 5/20
-2025-02-05 17:14:26,591 - Train Log Likelihood: -8413.9239, Test Log Likelihood: -1580.2960, Test Accuracy: 0.9635, Test F1: 0.9643
-2025-02-05 17:14:32,604 - Epoch: 6/20
-2025-02-05 17:14:32,604 - Train Log Likelihood: -8413.7210, Test Log Likelihood: -1557.4981, Test Accuracy: 0.9674, Test F1: 0.9676
-2025-02-05 17:14:38,682 - Epoch: 7/20
-2025-02-05 17:14:38,682 - Train Log Likelihood: -8413.7069, Test Log Likelihood: -1544.7070, Test Accuracy: 0.9596, Test F1: 0.9600
-2025-02-05 17:14:44,764 - Epoch: 8/20
-2025-02-05 17:14:44,765 - Train Log Likelihood: -8417.3615, Test Log Likelihood: -1559.7430, Test Accuracy: 0.9701, Test F1: 0.9703
-2025-02-05 17:14:51,206 - Epoch: 9/20
-2025-02-05 17:14:51,206 - Train Log Likelihood: -8418.9404, Test Log Likelihood: -1575.2081, Test Accuracy: 0.9688, Test F1: 0.9691
-2025-02-05 17:14:57,605 - Epoch: 10/20
-2025-02-05 17:14:57,605 - Train Log Likelihood: -8420.8328, Test Log Likelihood: -1555.0042, Test Accuracy: 0.9674, Test F1: 0.9679
-2025-02-05 17:15:03,655 - Epoch: 11/20
-2025-02-05 17:15:03,656 - Train Log Likelihood: -8420.8412, Test Log Likelihood: -1553.0950, Test Accuracy: 0.9596, Test F1: 0.9601
-2025-02-05 17:15:09,825 - Epoch: 12/20
-2025-02-05 17:15:09,825 - Train Log Likelihood: -8420.8023, Test Log Likelihood: -1544.6145, Test Accuracy: 0.9622, Test F1: 0.9630
-2025-02-05 17:15:15,796 - Epoch: 13/20
-2025-02-05 17:15:15,796 - Train Log Likelihood: -8422.6707, Test Log Likelihood: -1546.3964, Test Accuracy: 0.9635, Test F1: 0.9638
-2025-02-05 17:15:21,780 - Epoch: 14/20
-2025-02-05 17:15:21,780 - Train Log Likelihood: -8422.3629, Test Log Likelihood: -1549.6270, Test Accuracy: 0.9635, Test F1: 0.9642
-2025-02-05 17:15:27,425 - Epoch: 15/20
-2025-02-05 17:15:27,425 - Train Log Likelihood: -8422.4081, Test Log Likelihood: -1529.6835, Test Accuracy: 0.9557, Test F1: 0.9567
-2025-02-05 17:15:33,385 - Epoch: 16/20
-2025-02-05 17:15:33,385 - Train Log Likelihood: -8422.3719, Test Log Likelihood: -1531.0801, Test Accuracy: 0.9622, Test F1: 0.9627
-2025-02-05 17:15:37,348 - Epoch: 17/20
-2025-02-05 17:15:37,348 - Train Log Likelihood: -8422.4238, Test Log Likelihood: -1531.9135, Test Accuracy: 0.9583, Test F1: 0.9591
-2025-02-05 17:15:43,469 - Epoch: 18/20
-2025-02-05 17:15:43,469 - Train Log Likelihood: -8422.4196, Test Log Likelihood: -1513.9114, Test Accuracy: 0.9557, Test F1: 0.9563
-2025-02-05 17:15:49,510 - Epoch: 19/20
-2025-02-05 17:15:49,510 - Train Log Likelihood: -8422.4142, Test Log Likelihood: -1506.6419, Test Accuracy: 0.9714, Test F1: 0.9726
-2025-02-05 17:15:55,572 - Epoch: 20/20
-2025-02-05 17:15:55,572 - Train Log Likelihood: -8422.4162, Test Log Likelihood: -1518.9319, Test Accuracy: 0.9505, Test F1: 0.9521
+2025-02-08 18:34:26,890 - Epoch: 10/100 ---> Training Loss: 46.6534, Training Accuracy: 0.7073, Training F1: 0.6777
+2025-02-08 18:35:11,829 - Epoch: 20/100 ---> Training Loss: 31.3628, Training Accuracy: 0.8035, Training F1: 0.7819
+2025-02-08 18:35:56,761 - Epoch: 30/100 ---> Training Loss: 26.1469, Training Accuracy: 0.8301, Training F1: 0.8095
+2025-02-08 18:36:41,693 - Epoch: 40/100 ---> Training Loss: 23.4846, Training Accuracy: 0.8435, Training F1: 0.8253
+2025-02-08 18:37:26,780 - Epoch: 50/100 ---> Training Loss: 21.3324, Training Accuracy: 0.8559, Training F1: 0.8381
+2025-02-08 18:38:12,468 - Epoch: 60/100 ---> Training Loss: 20.4257, Training Accuracy: 0.8605, Training F1: 0.8473
+2025-02-08 18:38:58,353 - Epoch: 70/100 ---> Training Loss: 20.4678, Training Accuracy: 0.8621, Training F1: 0.8499
+2025-02-08 18:39:43,872 - Epoch: 80/100 ---> Training Loss: 17.8192, Training Accuracy: 0.8780, Training F1: 0.8688
+2025-02-08 18:40:29,125 - Epoch: 90/100 ---> Training Loss: 17.2021, Training Accuracy: 0.8775, Training F1: 0.8717
+2025-02-08 18:41:14,204 - Epoch: 100/100 ---> Training Loss: 15.4402, Training Accuracy: 0.8943, Training F1: 0.8903
