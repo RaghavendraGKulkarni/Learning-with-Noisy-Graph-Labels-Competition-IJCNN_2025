@@ -7,9 +7,8 @@ from tqdm import tqdm
 
 class myDataset(Dataset):
     
-    def __init__(self, filename, transform, pre_transform = None):
-        self.filename = filename
-        self.graphs = self.load_graphs_from_json(self.filename)
+    def __init__(self, graph_dicts, weights = None, transform = None, pre_transform = None):
+        self.graphs = self.convert_to_data_object(graph_dicts, weights)
         super().__init__(None, transform, pre_transform)
     
     def len(self):
@@ -19,14 +18,15 @@ class myDataset(Dataset):
         return self.graphs[idx]
     
     @staticmethod
-    def load_graphs_from_json(filename):
-        with gzip.open(filename, 'rt', encoding = 'utf-8') as file:
-            graph_dicts = json.load(file)
+    def convert_to_data_object(graph_dicts, weights):
         graphList = []
-        for graph_dict in tqdm(graph_dicts, desc = 'Loading Input Graphs', unit = 'graph'):
-            edges = torch.tensor(graph_dict['edge_index'], dtype = torch.long)
-            attributes = torch.tensor(graph_dict['edge_attr'], dtype = torch.float32) if graph_dict['edge_attr'] else None
-            num_nodes = graph_dict['num_nodes']
-            labels = torch.tensor(graph_dict['y'][0], dtype = torch.long) if graph_dict['y'] is not None else None
+        for i in range(len(graph_dicts)):
+            edges = torch.tensor(graph_dicts[i]['edge_index'], dtype = torch.long)
+            attributes = torch.tensor(graph_dicts[i]['edge_attr'], dtype = torch.float32) if graph_dicts[i]['edge_attr'] else None
+            num_nodes = graph_dicts[i]['num_nodes']
+            if  weights is not None:
+                labels = torch.tensor([weights[i]], dtype = torch.float32)
+            else:
+                labels = torch.tensor(graph_dicts[i]['y'][0], dtype = torch.long) if graph_dicts[i]['y'] else None
             graphList.append(Data(edge_index = edges, edge_attr = attributes, num_nodes = num_nodes, y = labels))
         return graphList

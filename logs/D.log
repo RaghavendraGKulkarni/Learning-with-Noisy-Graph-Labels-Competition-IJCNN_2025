@@ -1,10 +1,20 @@
-2025-02-08 18:46:00,281 - Epoch: 10/100 ---> Training Loss: 57.4708, Training Accuracy: 0.6682, Training F1: 0.6590
-2025-02-08 18:47:02,782 - Epoch: 20/100 ---> Training Loss: 40.8824, Training Accuracy: 0.7304, Training F1: 0.7256
-2025-02-08 18:48:04,489 - Epoch: 30/100 ---> Training Loss: 35.0226, Training Accuracy: 0.7586, Training F1: 0.7528
-2025-02-08 18:49:06,647 - Epoch: 40/100 ---> Training Loss: 34.0309, Training Accuracy: 0.7646, Training F1: 0.7582
-2025-02-08 18:50:08,830 - Epoch: 50/100 ---> Training Loss: 33.2897, Training Accuracy: 0.7731, Training F1: 0.7683
-2025-02-08 18:51:11,232 - Epoch: 60/100 ---> Training Loss: 30.3618, Training Accuracy: 0.7876, Training F1: 0.7840
-2025-02-08 18:52:13,918 - Epoch: 70/100 ---> Training Loss: 28.7066, Training Accuracy: 0.8036, Training F1: 0.8014
-2025-02-08 18:53:15,372 - Epoch: 80/100 ---> Training Loss: 30.1089, Training Accuracy: 0.7993, Training F1: 0.7973
-2025-02-08 18:54:16,762 - Epoch: 90/100 ---> Training Loss: 28.0955, Training Accuracy: 0.8161, Training F1: 0.8146
-2025-02-08 18:55:18,087 - Epoch: 100/100 ---> Training Loss: 24.3686, Training Accuracy: 0.8436, Training F1: 0.8428
+2025-02-12 19:50:08,766 - Epoch: 1/10
+2025-02-12 19:50:08,767 - Train Log Likelihood: -3264.9549, Validation Log Likelihood: -1038.3653
+2025-02-12 19:55:11,483 - Epoch: 2/10
+2025-02-12 19:55:11,484 - Train Log Likelihood: -2053.1483, Validation Log Likelihood: -986.6682
+2025-02-12 20:00:32,773 - Epoch: 3/10
+2025-02-12 20:00:32,773 - Train Log Likelihood: -1255.5710, Validation Log Likelihood: -1217.6990
+2025-02-12 20:05:36,384 - Epoch: 4/10
+2025-02-12 20:05:36,385 - Train Log Likelihood: -1009.1733, Validation Log Likelihood: -1569.2603
+2025-02-12 20:10:56,198 - Epoch: 5/10
+2025-02-12 20:10:56,198 - Train Log Likelihood: -823.1093, Validation Log Likelihood: -1805.8377
+2025-02-12 20:15:57,262 - Epoch: 6/10
+2025-02-12 20:15:57,263 - Train Log Likelihood: -736.6082, Validation Log Likelihood: -2073.8816
+2025-02-12 20:21:15,465 - Epoch: 7/10
+2025-02-12 20:21:15,466 - Train Log Likelihood: -653.0365, Validation Log Likelihood: -2288.0879
+2025-02-12 20:26:15,168 - Epoch: 8/10
+2025-02-12 20:26:15,168 - Train Log Likelihood: -424.2279, Validation Log Likelihood: -2181.2137
+2025-02-12 20:31:27,435 - Epoch: 9/10
+2025-02-12 20:31:27,435 - Train Log Likelihood: -440.2018, Validation Log Likelihood: -2425.3815
+2025-02-12 20:36:22,646 - Epoch: 10/10
+2025-02-12 20:36:22,646 - Train Log Likelihood: -646.3732, Validation Log Likelihood: -2558.5781

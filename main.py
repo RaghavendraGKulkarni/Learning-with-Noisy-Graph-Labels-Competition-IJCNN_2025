@@ -6,13 +6,14 @@ warnings.filterwarnings('ignore')
 import numpy as np
 import pandas as pd
 import json
+import gzip
 import pickle
 from tqdm import tqdm
 
 import torch
 from torch_geometric.loader import DataLoader
 
-from source.models import myGNN
+from source.models import myGNN, add_zeros
 from source.train import train
 from source.loadData import myDataset
 
@@ -25,9 +26,10 @@ def set_device_and_seed():
     
     return device
 
-def add_zeros(data):
-    data.x = torch.zeros(data.num_nodes, dtype=torch.long)
-    return data
+def load_graphs_from_json(filename):
+    with gzip.open(filename, 'rt', encoding = 'utf-8') as file:
+        graphs = json.load(file)
+    return graphs
 
 def load_and_test(test_path, batch_size, device):
     
@@ -35,11 +37,13 @@ def load_and_test(test_path, batch_size, device):
     with open('./source/filepaths.json', 'r') as f:
         filepaths = json.load(f)
     
-    test_dataset = myDataset(filename = test_path, transform = add_zeros)
+    test_graphs = load_graphs_from_json(test_path)
+    test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)
     test_loader = DataLoader(test_dataset, batch_size = batch_size)
     
     model = myGNN(num_classes = 6, num_layers = 5, dim = 128, dropout = 0.5, residual = True).to(device)
     model.load_state_dict(torch.load(filepaths[dataset]['prediction_model'], weights_only = True))
+    model.eval()
     
     test_pred_labels = []
     with torch.no_grad():
@@ -59,14 +63,14 @@ def load_and_test(test_path, batch_size, device):
 
 def train_and_test(train_path, test_path, batch_size, device):
     
-    train_dataset = myDataset(filename = train_path, transform = add_zeros)
-    train_loader = DataLoader(train_dataset, batch_size = batch_size)
+    train_graphs = load_graphs_from_json(train_path)
     
-    test_dataset = myDataset(filename = test_path, transform = add_zeros)
+    test_graphs = load_graphs_from_json(test_path)
+    test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)
     test_loader = DataLoader(test_dataset, batch_size = batch_size)
     print("Data loading completed")
     
-    best_model = train(train_loader, device)
+    best_model = train(train_graphs, device, batch_size)
     print("Training completed")
     
     test_pred_labels = []

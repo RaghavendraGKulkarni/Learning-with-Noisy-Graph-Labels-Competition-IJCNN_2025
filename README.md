@@ -4,11 +4,11 @@
 
 1. We first make use of custom GINConv model to generate Graph Embeddings for the training and testing graphs.
 
-2. Then we initialize a classifier model.
+2. Then we initialize a classifier model and append it with a transition matrix.
 
-3. Both, the classifier model and GINConv model parameters are learnt simultaneously during the training process.
+3. Both, the classifier model and the matrix are learnt simultaneously during the training process.
 
-5. The *load_and_test()* function loads the appropriate classifier model for predicting the true labels on the test set.
+5. The *load_and_test()* function excludes the matrix and uses only the classifier model for predicting the true labels on the test set.
 
 ## Steps to run the code:
 
