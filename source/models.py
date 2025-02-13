@@ -3,7 +3,7 @@ import torch
 import logging
 from sklearn.metrics import accuracy_score, f1_score
 
-from torch_geometric.nn import global_mean_pool
+from torch_geometric.nn import GlobalAttention
 from torch_geometric.loader import DataLoader
 
 from source.conv import GNN_Node
@@ -21,7 +21,10 @@ class myGNN(torch.nn.Module):
         self.num_layers = num_layers
         self.dim = dim
         self.gnn_node = GNN_Node(self.num_layers, self.dim, dropout, residual)
-        self.pooler = global_mean_pool
+        self.pooler = GlobalAttention(gate_nn = torch.nn.Sequential(torch.nn.Linear(self.dim, self.dim//2), 
+                                                                    torch.nn.BatchNorm1d(self.dim//2), 
+                                                                    torch.nn.ReLU(), 
+                                                                    torch.nn.Linear(self.dim//2, 1)))
         self.predictor = torch.nn.Linear(self.dim, self.num_classes)
         pass
     
@@ -162,7 +165,7 @@ class myModel:
             train_dataset = myDataset(train_graphs, weights = train_true_probs, transform = add_zeros)
             train_loader = DataLoader(train_dataset, batch_size = batch_size)
             
-            train_loss, acc, f1 = self.train(train_loader, 50, True)
+            train_loss, acc, f1 = self.train(train_loader, 10, True)
             
             # Progress checking
             train_log_likelihood = self.calculate_log_likelihood(train_loader, train_y)

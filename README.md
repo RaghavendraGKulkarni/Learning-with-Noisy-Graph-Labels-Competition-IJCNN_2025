@@ -2,7 +2,7 @@
 
 ## Approach:
 
-1. We first make use of custom GINConv model to generate Graph Embeddings for the training and testing graphs.
+1. We first make use of custom GINConv model to generate Graph Embeddings for the training and testing graphs. We use a Gated Attention network to combine the node embeddings into graph embeddings.
 
 2. Then we initialize a classifier model and append it with a transition matrix.
 
