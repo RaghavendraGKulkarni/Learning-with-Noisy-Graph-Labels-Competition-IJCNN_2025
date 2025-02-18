@@ -10,13 +10,13 @@ from source.models import myGNN, myModel
 
 def train(train_graphs, device, batch_size):
     
-    classifier = myGNN(num_classes = 6, num_layers = 5, dim = 128, dropout = 0.5, residual = True)
+    classifier = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True)
     model = myModel(model = classifier, num_classes = 6, device = device)
     
     model.fit(train_graphs, num_epochs = 10, batch_size = batch_size)
     
     model.bestEpochs.sort()
-    best_model = myGNN(num_classes = 6, num_layers = 5, dim = 128, dropout = 0.5, residual = True)
+    best_model = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True)
     best_model.load_state_dict(model.bestEpochs[0][3])
     
     parent = './checkpoints/E/'

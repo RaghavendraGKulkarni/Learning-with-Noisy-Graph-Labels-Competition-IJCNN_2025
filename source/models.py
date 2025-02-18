@@ -3,7 +3,8 @@ import torch
 import logging
 from sklearn.metrics import accuracy_score, f1_score
 
-from torch_geometric.nn import GlobalAttention
+from torch_geometric.nn import SAGPooling, global_mean_pool
+from torch_geometric.nn.conv import GATConv
 from torch_geometric.loader import DataLoader
 
 from source.conv import GNN_Node
@@ -21,16 +22,15 @@ class myGNN(torch.nn.Module):
         self.num_layers = num_layers
         self.dim = dim
         self.gnn_node = GNN_Node(self.num_layers, self.dim, dropout, residual)
-        self.pooler = GlobalAttention(gate_nn = torch.nn.Sequential(torch.nn.Linear(self.dim, self.dim//2), 
-                                                                    torch.nn.BatchNorm1d(self.dim//2), 
-                                                                    torch.nn.ReLU(), 
-                                                                    torch.nn.Linear(self.dim//2, 1)))
+        self.pooler1 = SAGPooling(in_channels = self.dim, GNN = GATConv)
+        self.pooler2 = global_mean_pool
         self.predictor = torch.nn.Linear(self.dim, self.num_classes)
         pass
     
     def forward(self, batched_data):
         node_embedding = self.gnn_node(batched_data)
-        graph_embedding = self.pooler(node_embedding, batched_data.batch)
+        out = self.pooler1(x = node_embedding, edge_index = batched_data.edge_index, batch = batched_data.batch)
+        graph_embedding = self.pooler2(out[0], out[3])
         return self.predictor(graph_embedding)
 
 class myModel:
@@ -110,7 +110,7 @@ class myModel:
             acc, f1 = accuracy_score(train_true_labels, train_pred_labels), f1_score(train_true_labels, train_pred_labels, average = 'weighted')
             bestEpochs.append((total_loss, 1 - acc, 1 - f1, self.model.state_dict()))
         bestEpochs.sort()
-        self.model = myGNN(num_classes = 6, num_layers = 5, dim = 128, dropout = 0.5, residual = True).to(self.device)
+        self.model = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True).to(self.device)
         self.model.load_state_dict(bestEpochs[0][3])
         return bestEpochs[0][0], 1 - bestEpochs[0][1], 1 - bestEpochs[0][2]
     

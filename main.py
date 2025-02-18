@@ -44,7 +44,7 @@ def load_and_test(test_path, batch_size, device):
     test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)
     test_loader = DataLoader(test_dataset, batch_size = batch_size)
     
-    model = myGNN(num_classes = 6, num_layers = 5, dim = 128, dropout = 0.5, residual = True).to(device)
+    model = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True).to(device)
     model.load_state_dict(torch.load(filepaths[dataset]['prediction_model'], weights_only = True))
     model.eval()
     
