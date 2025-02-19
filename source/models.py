@@ -26,14 +26,17 @@ class myGNN(torch.nn.Module):
         self.gnn_node = GNN_Node(self.num_layers, self.dim, dropout, residual)
         self.pooler1 = SAGPooling(in_channels = self.dim, GNN = GATConv)
         self.pooler2 = global_mean_pool
-        self.predictor = KANLayer(self.dim, self.num_classes)
+        self.predictor = torch.nn.Sequential(KANLayer(self.dim, self.dim//2), 
+                                            KANLayer(self.dim//2, self.num_classes))
         pass
     
     def forward(self, batched_data):
         node_embedding = self.gnn_node(batched_data)
         out = self.pooler1(x = node_embedding, edge_index = batched_data.edge_index, batch = batched_data.batch)
         graph_embedding = self.pooler2(out[0], out[3])
-        return self.predictor(graph_embedding)[0]
+        out = self.predictor[0](graph_embedding)[0]
+        prediction = self.predictor[1](out)[0]
+        return prediction
 
 class myModel:
     
@@ -173,7 +176,7 @@ class myModel:
             train_log_likelihood = self.calculate_log_likelihood(train_loader, train_y)
             validation_log_likelihood = self.calculate_log_likelihood(validation_loader, validation_y)
             
-            epoch_info = (-train_log_likelihood, -validation_log_likelihood, epoch, self.model.state_dict())
+            epoch_info = (-validation_log_likelihood, -train_log_likelihood, epoch, self.model.state_dict())
             self.bestEpochs.append(epoch_info)
             
             if epoch % logging_frequency == 0:

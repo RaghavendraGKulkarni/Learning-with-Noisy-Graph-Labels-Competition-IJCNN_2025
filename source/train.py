@@ -31,8 +31,8 @@ def train(train_graphs, device, batch_size):
         name = f'model_E_epoch_{epoch[2]}.pth'
         torch.save({
             'epoch':epoch[2],
-            'train_log_likelihood':-epoch[0],
-            'validation_log_likelihood':-epoch[1],
+            'train_log_likelihood':-epoch[1],
+            'validation_log_likelihood':-epoch[0],
             'model_state_dict': epoch[3]
         }, parent + name)
     torch.save(best_model.state_dict(), './checkpoints/E/prediction_model.pth')
