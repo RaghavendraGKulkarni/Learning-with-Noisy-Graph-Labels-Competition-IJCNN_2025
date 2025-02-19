@@ -10,6 +10,8 @@ from torch_geometric.loader import DataLoader
 from source.conv import GNN_Node
 from source.loadData import myDataset
 
+from kan import KANLayer
+
 def add_zeros(data):
     data.x = torch.zeros(data.num_nodes, dtype=torch.long)
     return data
@@ -24,14 +26,14 @@ class myGNN(torch.nn.Module):
         self.gnn_node = GNN_Node(self.num_layers, self.dim, dropout, residual)
         self.pooler1 = SAGPooling(in_channels = self.dim, GNN = GATConv)
         self.pooler2 = global_mean_pool
-        self.predictor = torch.nn.Linear(self.dim, self.num_classes)
+        self.predictor = KANLayer(self.dim, self.num_classes)
         pass
     
     def forward(self, batched_data):
         node_embedding = self.gnn_node(batched_data)
         out = self.pooler1(x = node_embedding, edge_index = batched_data.edge_index, batch = batched_data.batch)
         graph_embedding = self.pooler2(out[0], out[3])
-        return self.predictor(graph_embedding)
+        return self.predictor(graph_embedding)[0]
 
 class myModel:
     
