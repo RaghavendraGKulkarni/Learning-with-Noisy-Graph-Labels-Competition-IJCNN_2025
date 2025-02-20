@@ -1,20 +1,20 @@
-2025-02-20 13:35:31,416 - Epoch: 1/10
-2025-02-20 13:35:31,416 - Train Log Likelihood: -9707.4413, Validation Log Likelihood: -2412.5770
-2025-02-20 13:36:27,561 - Epoch: 2/10
-2025-02-20 13:36:27,561 - Train Log Likelihood: -9707.7630, Validation Log Likelihood: -2412.6551
-2025-02-20 13:37:24,507 - Epoch: 3/10
-2025-02-20 13:37:24,507 - Train Log Likelihood: -9707.6486, Validation Log Likelihood: -2412.5235
-2025-02-20 13:38:20,214 - Epoch: 4/10
-2025-02-20 13:38:20,214 - Train Log Likelihood: -9707.3816, Validation Log Likelihood: -2412.4515
-2025-02-20 13:39:16,762 - Epoch: 5/10
-2025-02-20 13:39:16,762 - Train Log Likelihood: -9707.3745, Validation Log Likelihood: -2412.5984
-2025-02-20 13:40:12,581 - Epoch: 6/10
-2025-02-20 13:40:12,581 - Train Log Likelihood: -9708.6712, Validation Log Likelihood: -2413.2545
-2025-02-20 13:41:07,999 - Epoch: 7/10
-2025-02-20 13:41:07,999 - Train Log Likelihood: -9708.5957, Validation Log Likelihood: -2412.9643
-2025-02-20 13:42:03,075 - Epoch: 8/10
-2025-02-20 13:42:03,075 - Train Log Likelihood: -9707.2252, Validation Log Likelihood: -2412.5457
-2025-02-20 13:42:59,867 - Epoch: 9/10
-2025-02-20 13:42:59,867 - Train Log Likelihood: -9707.1516, Validation Log Likelihood: -2412.5890
-2025-02-20 13:43:56,041 - Epoch: 10/10
-2025-02-20 13:43:56,041 - Train Log Likelihood: -9706.8995, Validation Log Likelihood: -2413.0209
+2025-02-20 19:11:18,194 - Epoch: 1/10
+2025-02-20 19:11:18,195 - Train Log Likelihood: -9707.2888, Validation Log Likelihood: -2412.5441
+2025-02-20 19:12:09,571 - Epoch: 2/10
+2025-02-20 19:12:09,571 - Train Log Likelihood: -9707.4388, Validation Log Likelihood: -2412.5507
+2025-02-20 19:13:10,942 - Epoch: 3/10
+2025-02-20 19:13:10,942 - Train Log Likelihood: -9707.3136, Validation Log Likelihood: -2412.5195
+2025-02-20 19:14:13,516 - Epoch: 4/10
+2025-02-20 19:14:13,517 - Train Log Likelihood: -9707.3434, Validation Log Likelihood: -2412.5421
+2025-02-20 19:15:34,046 - Epoch: 5/10
+2025-02-20 19:15:34,047 - Train Log Likelihood: -9707.2650, Validation Log Likelihood: -2412.6677
+2025-02-20 19:16:37,104 - Epoch: 6/10
+2025-02-20 19:16:37,104 - Train Log Likelihood: -9707.3699, Validation Log Likelihood: -2412.6074
+2025-02-20 19:17:36,153 - Epoch: 7/10
+2025-02-20 19:17:36,153 - Train Log Likelihood: -9707.2971, Validation Log Likelihood: -2412.6084
+2025-02-20 19:18:38,462 - Epoch: 8/10
+2025-02-20 19:18:38,462 - Train Log Likelihood: -9707.3448, Validation Log Likelihood: -2412.5890
+2025-02-20 19:19:40,214 - Epoch: 9/10
+2025-02-20 19:19:40,215 - Train Log Likelihood: -9707.4096, Validation Log Likelihood: -2412.5662
+2025-02-20 19:20:41,902 - Epoch: 10/10
+2025-02-20 19:20:41,903 - Train Log Likelihood: -9707.2686, Validation Log Likelihood: -2412.5311

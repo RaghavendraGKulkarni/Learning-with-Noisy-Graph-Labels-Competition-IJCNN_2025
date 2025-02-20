@@ -28,5 +28,5 @@ class myDataset(Dataset):
                 labels = torch.tensor([weights[i]], dtype = torch.float32)
             else:
                 labels = torch.tensor(graph_dicts[i]['y'][0], dtype = torch.long) if graph_dicts[i]['y'] else None
-            graphList.append(Data(edge_index = edges, edge_attr = attributes, num_nodes = num_nodes, y = labels))
+            graphList.append(Data(edge_index = edges, edge_attr = attributes, num_nodes = num_nodes, y = labels, graph_features = torch.tensor([graph_dicts[i]["graph_features"]],dtype = torch.float32)))
         return graphList

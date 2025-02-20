@@ -3,7 +3,6 @@ import torch
 import logging
 from sklearn.metrics import accuracy_score, f1_score
 
-from torch.nn import TransformerDecoderLayer, TransformerDecoder
 from torch_geometric.nn import SAGPooling, global_mean_pool
 from torch_geometric.nn.conv import GATConv
 from torch_geometric.loader import DataLoader
@@ -17,32 +16,37 @@ def add_zeros(data):
     data.x = torch.zeros(data.num_nodes, dtype=torch.long)
     return data
 
+
 class myGNN(torch.nn.Module):
-    
     def __init__(self, num_classes, num_layers, dim, dropout, residual):
         super(myGNN, self).__init__()
         self.num_classes = num_classes
         self.num_layers = num_layers
         self.dim = dim
         self.gnn_node = GNN_Node(self.num_layers, self.dim, dropout, residual)
-        self.pooler1 = SAGPooling(in_channels = self.dim, GNN = GATConv)
+        self.pooler1 = SAGPooling(in_channels=self.dim, GNN=GATConv)
         self.pooler2 = global_mean_pool
-        self.layer1 = KANLayer(self.dim, self.dim)
-        self.layer2 = KANLayer(self.dim, self.dim//2)
-        self.layer3 = KANLayer(self.dim//2, self.num_classes)
-        transformer_layer = TransformerDecoderLayer(d_model = self.dim, nhead = 4)
-        self.transformer_decoder = TransformerDecoder(transformer_layer, num_layers = num_layers)
-        pass
-    
+        self.predictor = torch.nn.Sequential(
+            KANLayer(self.dim + 4, self.dim // 2),  # Adjusted input size
+            KANLayer(self.dim // 2, self.num_classes)
+        )
+
     def forward(self, batched_data):
         node_embedding = self.gnn_node(batched_data)
-        out = self.pooler1(x = node_embedding, edge_index = batched_data.edge_index, batch = batched_data.batch)
+        out = self.pooler1(x=node_embedding, edge_index=batched_data.edge_index, batch=batched_data.batch)
         graph_embedding = self.pooler2(out[0], out[3])
-        x = self.layer1(graph_embedding)[0]
-        x = self.transformer_decoder(x, x)
-        x = self.transformer_decoder(x, x)
-        hidden = self.layer2(x)[0]
-        prediction = self.layer3(hidden)[0]
+        
+#         print("Graph embedding shape:", graph_embedding.shape)  # Debug print
+        
+        # Compute additional features
+        graph_features = batched_data.graph_features
+        
+        # Concatenate additional features to graph embeddings
+        enhanced_embedding = torch.cat([graph_embedding, graph_features], dim=1)
+#         print("Enhanced embedding shape:", enhanced_embedding.shape)  # Debug print
+        
+        out = self.predictor[0](enhanced_embedding)[0]
+        prediction = self.predictor[1](out)[0]
         return prediction
 
 class myModel:
@@ -121,7 +125,7 @@ class myModel:
                     train_true_labels += data.y.cpu().detach().numpy().tolist()
             acc, f1 = accuracy_score(train_true_labels, train_pred_labels), f1_score(train_true_labels, train_pred_labels, average = 'weighted')
             bestEpochs.append((total_loss, 1 - acc, 1 - f1, self.model.state_dict()))
-        bestEpochs.sort(key = lambda x : x[0])
+        bestEpochs.sort()
         self.model = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True).to(self.device)
         self.model.load_state_dict(bestEpochs[0][3])
         return bestEpochs[0][0], 1 - bestEpochs[0][1], 1 - bestEpochs[0][2]

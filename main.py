@@ -16,6 +16,8 @@ from torch_geometric.loader import DataLoader
 from source.models import myGNN, add_zeros
 from source.train import train
 from source.loadData import myDataset
+import networkx as nx
+from torch_geometric.utils import to_networkx
 
 def set_device_and_seed():
     
@@ -34,6 +36,20 @@ def load_graphs_from_json(filename):
         graphs = json.load(file)
     return graphs
 
+def compute_graph_features(graphs_dict):
+    for graph in graphs_dict:
+        G = nx.Graph()
+        G.add_edges_from(np.asarray(graph['edge_index']).T.tolist())
+        centrality = nx.degree_centrality(G)
+        centrality_values = list(centrality.values())
+        max_centrality = max(centrality_values) if centrality_values else 0.0
+        min_centrality = min(centrality_values) if centrality_values else 0.0
+        avg_centrality = sum(centrality_values) / len(centrality_values) if centrality_values else 0.0
+        assortativity = nx.degree_assortativity_coefficient(G) if len(G.nodes) > 1 else 0.0
+        graph['graph_features'] = [max_centrality, min_centrality, avg_centrality, assortativity]
+    return graphs_dict
+
+
 def load_and_test(test_path, batch_size, device):
     
     dataset = list(map(str, test_path.split('/')))[-2]
@@ -41,6 +57,9 @@ def load_and_test(test_path, batch_size, device):
         filepaths = json.load(f)
     
     test_graphs = load_graphs_from_json(test_path)
+   
+    test_graphs = compute_graph_features(test_graphs)
+    
     test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)
     test_loader = DataLoader(test_dataset, batch_size = batch_size)
     
@@ -67,8 +86,11 @@ def load_and_test(test_path, batch_size, device):
 def train_and_test(train_path, test_path, batch_size, device):
     
     train_graphs = load_graphs_from_json(train_path)
-    
     test_graphs = load_graphs_from_json(test_path)
+    
+    train_graphs = compute_graph_features(train_graphs)
+    test_graphs = compute_graph_features(test_graphs)
+    
     test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)
     test_loader = DataLoader(test_dataset, batch_size = batch_size)
     print("Data loading completed")
