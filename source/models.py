@@ -28,7 +28,9 @@ class myGNN(torch.nn.Module):
         self.pooler2 = global_mean_pool
         self.predictor = torch.nn.Sequential(
             KANLayer(self.dim + 4, self.dim // 2),  # Adjusted input size
-            KANLayer(self.dim // 2, self.num_classes)
+            KANLayer(self.dim // 2, self.dim // 4),
+            KANLayer(self.dim // 4, self.dim // 8),
+            KANLayer(self.dim // 8, self.num_classes)
         )
 
     def forward(self, batched_data):
@@ -46,7 +48,9 @@ class myGNN(torch.nn.Module):
 #         print("Enhanced embedding shape:", enhanced_embedding.shape)  # Debug print
         
         out = self.predictor[0](enhanced_embedding)[0]
-        prediction = self.predictor[1](out)[0]
+        out = self.predictor[1](out)[0]
+        out = self.predictor[2](out)[0]
+        prediction = self.predictor[3](out)[0]
         return prediction
 
 class myModel:
