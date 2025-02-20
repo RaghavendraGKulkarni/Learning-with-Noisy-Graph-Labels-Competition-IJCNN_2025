@@ -4,7 +4,7 @@
 
 1. We first make use of custom GINConv model to generate Graph Embeddings for the training and testing graphs. We use a SAGPooling with GATConv network to combine the node embeddings into graph embeddings.
 
-2. Then we initialize a classifier model using a Kolmogorov Arnold Network layer and append it with a transition matrix.
+2. Then we initialize a classifier model using three Kolmogorov Arnold Network layers and a TransformerDecoderLayer. This is appended it with a transition matrix.
 
 3. Both, the classifier model and the matrix are learnt simultaneously during the training process.
 
