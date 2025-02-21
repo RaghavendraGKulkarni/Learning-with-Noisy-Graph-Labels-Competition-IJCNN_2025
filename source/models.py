@@ -16,7 +16,6 @@ def add_zeros(data):
     data.x = torch.zeros(data.num_nodes, dtype=torch.long)
     return data
 
-
 class myGNN(torch.nn.Module):
     def __init__(self, num_classes, num_layers, dim, dropout, residual):
         super(myGNN, self).__init__()
@@ -28,29 +27,17 @@ class myGNN(torch.nn.Module):
         self.pooler2 = global_mean_pool
         self.predictor = torch.nn.Sequential(
             KANLayer(self.dim + 4, self.dim // 2),  # Adjusted input size
-            KANLayer(self.dim // 2, self.dim // 4),
-            KANLayer(self.dim // 4, self.dim // 8),
-            KANLayer(self.dim // 8, self.num_classes)
+            KANLayer(self.dim // 2, self.num_classes)
         )
 
     def forward(self, batched_data):
         node_embedding = self.gnn_node(batched_data)
         out = self.pooler1(x=node_embedding, edge_index=batched_data.edge_index, batch=batched_data.batch)
         graph_embedding = self.pooler2(out[0], out[3])
-        
-#         print("Graph embedding shape:", graph_embedding.shape)  # Debug print
-        
-        # Compute additional features
         graph_features = batched_data.graph_features
-        
-        # Concatenate additional features to graph embeddings
         enhanced_embedding = torch.cat([graph_embedding, graph_features], dim=1)
-#         print("Enhanced embedding shape:", enhanced_embedding.shape)  # Debug print
-        
         out = self.predictor[0](enhanced_embedding)[0]
-        out = self.predictor[1](out)[0]
-        out = self.predictor[2](out)[0]
-        prediction = self.predictor[3](out)[0]
+        prediction = self.predictor[1](out)[0]
         return prediction
 
 class myModel:
@@ -129,7 +116,7 @@ class myModel:
                     train_true_labels += data.y.cpu().detach().numpy().tolist()
             acc, f1 = accuracy_score(train_true_labels, train_pred_labels), f1_score(train_true_labels, train_pred_labels, average = 'weighted')
             bestEpochs.append((total_loss, 1 - acc, 1 - f1, self.model.state_dict()))
-        bestEpochs.sort()
+        bestEpochs.sort(key = lambda x : x[0])
         self.model = myGNN(num_classes = 6, num_layers = 2, dim = 128, dropout = 0.5, residual = True).to(self.device)
         self.model.load_state_dict(bestEpochs[0][3])
         return bestEpochs[0][0], 1 - bestEpochs[0][1], 1 - bestEpochs[0][2]

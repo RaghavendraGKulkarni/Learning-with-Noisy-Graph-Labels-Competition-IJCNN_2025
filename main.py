@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import json
 import gzip
+import random
 import pickle
 from tqdm import tqdm
 
@@ -23,6 +24,7 @@ def set_device_and_seed():
     
     np.random.seed(42)
     torch.manual_seed(42)
+    random.seed(42)
     if torch.cuda.is_available():
         torch.cuda.manual_seed(42)
         torch.cuda.manual_seed_all(42)
@@ -49,7 +51,6 @@ def compute_graph_features(graphs_dict):
         graph['graph_features'] = [max_centrality, min_centrality, avg_centrality, assortativity]
     return graphs_dict
 
-
 def load_and_test(test_path, batch_size, device):
     
     dataset = list(map(str, test_path.split('/')))[-2]
@@ -57,7 +58,6 @@ def load_and_test(test_path, batch_size, device):
         filepaths = json.load(f)
     
     test_graphs = load_graphs_from_json(test_path)
-   
     test_graphs = compute_graph_features(test_graphs)
     
     test_dataset = myDataset(test_graphs, weights = None, transform = add_zeros)

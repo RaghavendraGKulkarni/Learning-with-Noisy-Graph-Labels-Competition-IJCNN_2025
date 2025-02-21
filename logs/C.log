@@ -1,20 +1,21 @@
-2025-02-20 19:11:18,194 - Epoch: 1/10
-2025-02-20 19:11:18,195 - Train Log Likelihood: -9707.2888, Validation Log Likelihood: -2412.5441
-2025-02-20 19:12:09,571 - Epoch: 2/10
-2025-02-20 19:12:09,571 - Train Log Likelihood: -9707.4388, Validation Log Likelihood: -2412.5507
-2025-02-20 19:13:10,942 - Epoch: 3/10
-2025-02-20 19:13:10,942 - Train Log Likelihood: -9707.3136, Validation Log Likelihood: -2412.5195
-2025-02-20 19:14:13,516 - Epoch: 4/10
-2025-02-20 19:14:13,517 - Train Log Likelihood: -9707.3434, Validation Log Likelihood: -2412.5421
-2025-02-20 19:15:34,046 - Epoch: 5/10
-2025-02-20 19:15:34,047 - Train Log Likelihood: -9707.2650, Validation Log Likelihood: -2412.6677
-2025-02-20 19:16:37,104 - Epoch: 6/10
-2025-02-20 19:16:37,104 - Train Log Likelihood: -9707.3699, Validation Log Likelihood: -2412.6074
-2025-02-20 19:17:36,153 - Epoch: 7/10
-2025-02-20 19:17:36,153 - Train Log Likelihood: -9707.2971, Validation Log Likelihood: -2412.6084
-2025-02-20 19:18:38,462 - Epoch: 8/10
-2025-02-20 19:18:38,462 - Train Log Likelihood: -9707.3448, Validation Log Likelihood: -2412.5890
-2025-02-20 19:19:40,214 - Epoch: 9/10
-2025-02-20 19:19:40,215 - Train Log Likelihood: -9707.4096, Validation Log Likelihood: -2412.5662
-2025-02-20 19:20:41,902 - Epoch: 10/10
-2025-02-20 19:20:41,903 - Train Log Likelihood: -9707.2686, Validation Log Likelihood: -2412.5311
+2025-02-20 23:00:06,955 - Epoch: 1/10
+2025-02-20 23:00:06,956 - Train Log Likelihood: -2934.8964, Validation Log Likelihood: -897.4838
+2025-02-20 23:00:51,163 - Epoch: 2/10
+2025-02-20 23:00:51,164 - Train Log Likelihood: -3293.4672, Validation Log Likelihood: -971.4701
+2025-02-20 23:01:35,067 - Epoch: 3/10
+2025-02-20 23:01:35,067 - Train Log Likelihood: -2930.4295, Validation Log Likelihood: -892.6862
+2025-02-20 23:02:18,349 - Epoch: 4/10
+2025-02-20 23:02:18,349 - Train Log Likelihood: -2716.0360, Validation Log Likelihood: -925.6833
+2025-02-20 23:03:02,778 - Epoch: 5/10
+2025-02-20 23:03:02,778 - Train Log Likelihood: -2514.4725, Validation Log Likelihood: -846.7703
+2025-02-20 23:03:46,372 - Epoch: 6/10
+2025-02-20 23:03:46,373 - Train Log Likelihood: -2569.3275, Validation Log Likelihood: -958.3000
+2025-02-20 23:04:32,558 - Epoch: 7/10
+2025-02-20 23:04:32,558 - Train Log Likelihood: -2682.1634, Validation Log Likelihood: -948.7815
+2025-02-20 23:05:17,363 - Epoch: 8/10
+2025-02-20 23:05:17,364 - Train Log Likelihood: -2405.1478, Validation Log Likelihood: -907.4376
+2025-02-20 23:06:03,230 - Epoch: 9/10
+2025-02-20 23:06:03,231 - Train Log Likelihood: -2424.9163, Validation Log Likelihood: -887.9030
+2025-02-20 23:06:47,422 - Epoch: 10/10
+2025-02-20 23:06:47,422 - Train Log Likelihood: -2409.7988, Validation Log Likelihood: -899.3753
+2025-02-20 23:06:52,211 - No such comm target registered: jupyter.widget.version
